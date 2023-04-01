@@ -7,9 +7,6 @@ tags:
 - git--helpful-commands
 ---
 
-
-[category: git](category:_git "wikilink")
-
 ### help
 
 `git help `<command>
@@ -49,7 +46,7 @@ command
 `git push -u origin master`
 
 ### get status of remote
-
+```
     git remote show origin
     * remote origin
       Fetch URL: git@git.server:dba/project.git
@@ -76,9 +73,9 @@ command
         project2_supp pushes to project2_supp (up to date)
         project2_uat  pushes to project2_uat  (up to date)
         master      pushes to master      (up to date)
-
+```
 ### change remote url
-
+```
     # old url
     git remote -v
       origin    git@bitbucket.org:kjsdev/kubernetes.git (fetch)
@@ -91,9 +88,9 @@ command
     git remote -v
       origin    git@bitbucket.org:musodev/kubernetes.git (fetch)
       origin    git@bitbucket.org:musodev/kubernetes.git (push)
-
+```
 ### get status on local branches
-
+```
     git branch -v
       20150226    be75a50 test for git
       project_prj1   5ce281f Merge branch 'project2_uat'
@@ -101,26 +98,26 @@ command
       project2_supp 8f14e3d patch BTS20150325
       project2_uat  bff8125 patch BTS20150414 v2
       master      5ce281f Merge branch 'project2_uat'
-
+```
 ### reverting back to a named commit
 
 If you need to revert back to a previous commit, find the hash of the
 commit from git log;
-
+```
 `git log`
 `commit a7e243693f0607311c0f2c4fb1ecde2e6c2d2097`
 `Author: developer 1<dev1@email.com>`
 `Date:   Mon Aug 3 12:16:45 2015 +0100`
 
 `    Emergency patch`
-
+```
 Then pass that hash in;
 
   - This will destroy any local modifications.
   - Don't do it if you have uncommitted work you want to keep.
   - reset it hard, reset the HEAD, commit then push it back to origin
 
-<!-- end list -->
+
 
 ```
 
@@ -132,11 +129,11 @@ goronski website_code (project2_supp) # git push
 ```
 
 Alternatively, if there's work to keep:
-
+```
     git stash
     git reset --hard 0d1d7fc32
     git stash pop
-
+```
   - This saves the modifications, then reapplies that patch after
     resetting.
   - You could get merge conflicts, if you've modified things which were
