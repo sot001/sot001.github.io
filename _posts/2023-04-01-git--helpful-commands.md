@@ -9,7 +9,7 @@ tags:
 
 ### help
 
-`git help `<command>
+`git help <command>`
 
 ### Initialising Git
 
@@ -37,8 +37,8 @@ tags:
 its important to not that after committing changes, you still need to
 push it back to the server
 
-<b> ProTip</b> use <i>sudo nagios -v \~nagios/etc/nagios.cfg && sudo
-/etc/init.d/nagios reload</i> to check and reload nagios all in the one
+** ProTip** use _sudo nagios -v \~nagios/etc/nagios.cfg && sudo
+/etc/init.d/nagios reload_ to check and reload nagios all in the one
 command
 
 ### push back to master (use other branch name if not pushing to master)
@@ -213,4 +213,4 @@ Now if you run "git apply" but are unhappy with it.. simply run:
 
 `git stash-unapply`
 
-More protips: <https://git-scm.com/book/en/v1/Git-Tools-Stashing>
+More protips:[ https://git-scm.com/book/en/v1/Git-Tools-Stashing]( https://git-scm.com/book/en/v1/Git-Tools-Stashing)
