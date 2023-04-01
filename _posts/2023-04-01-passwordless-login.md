@@ -8,8 +8,6 @@ tags:
 ---
 
 
-[category: ssh](category:_ssh "wikilink") also called public/private key
-authentication
 
 generate the keys on your local workstation:
 

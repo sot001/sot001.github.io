@@ -7,8 +7,9 @@ tags:
 - find-a-pattern-in-a-string
 ---
 
-
-`if `[`$var``   ``=``   ``*pattern1*`]($var_=_*pattern1* "wikilink")
+```
+`if `[`$var``   ``=``   ``*pattern1*`]
 `then`
 `    echo "Do something"`
 `fi`
+```

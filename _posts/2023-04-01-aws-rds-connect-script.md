@@ -8,8 +8,6 @@ tags:
 ---
 
 
-[category: rds](category:_rds "wikilink") [category:
-aws](category:_aws "wikilink")
 
 Connect to different instances of RDS via ssh tunnels (ie bastion) with
 the handy (redacted) script show at the bottom of the page whcih
@@ -48,9 +46,6 @@ requires;
     host = 127.0.0.1
     port = 3310
 
-See "[Mysql - keeping your password
-safe](Mysql_-_keeping_your_password_safe "wikilink")" for more details
-on this utility
 
 Once you connect successfully, then it will show you the port it has
 proixied over.

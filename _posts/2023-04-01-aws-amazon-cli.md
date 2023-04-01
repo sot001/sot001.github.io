@@ -275,4 +275,3 @@ instances;
 
 Looks for Runtime values starting with "node"
 
-[Category:AWS](Category:AWS "wikilink")

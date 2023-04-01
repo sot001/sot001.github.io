@@ -8,8 +8,6 @@ tags:
 ---
 
 
-check the cluster status by looking at the WSREP status variable, as
-show [MySQL cluster](MySQL_cluster "wikilink") here
 
 #### entire cluster is down, how do I restart it
 

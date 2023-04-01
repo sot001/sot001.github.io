@@ -8,8 +8,7 @@ tags:
 ---
 
 
-[category: linux](category:_linux "wikilink") [category:
-sysadmin](category:_sysadmin "wikilink") Create the new file (14Gig in
+Create the new file (14Gig in
 this example) using fallocate as its quicker than dd
 
 `fallocate -l 14G /mnt/lvm_log/swapfile`

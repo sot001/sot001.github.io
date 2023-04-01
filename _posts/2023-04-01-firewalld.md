@@ -8,8 +8,6 @@ tags:
 ---
 
 
-[category:firewall](category:firewall "wikilink")
-[category:security](category:security "wikilink")
 
 ### Is it running?
 
