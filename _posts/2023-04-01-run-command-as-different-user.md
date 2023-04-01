@@ -8,7 +8,7 @@ tags:
 ---
 
 
-`su - `<username>` -s `<shell>` -c "`<command>`"`
+`su - `username` -s `shell` -c "`command`"`
 
 eg;
 
