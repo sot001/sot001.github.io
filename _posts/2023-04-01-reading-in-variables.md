@@ -1,7 +1,12 @@
 ---
-title: Reading in Variables
-category: bash
+title: reading-in-variables
+date: '2023-04-01 19:37:57 +0000'
+categories:
+- reading-in-variables
+tags:
+- reading-in-variables
 ---
+
 
 Use 'read' command
 
