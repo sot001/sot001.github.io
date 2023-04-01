@@ -1,0 +1,43 @@
+[category:iptables](category:iptables "wikilink")[category:firewall](category:firewall "wikilink")
+
+### display POST/PREROUTING rules
+
+iptables -t nat --line-numbers -L
+
+```
+root@ip-10-243-87-86:~# iptables -t nat --line-numbers -L
+Chain PREROUTING (policy ACCEPT)
+num  target     prot opt source               destination
+1    DNAT       tcp  --  anywhere             anywhere             tcp dpt:mysql to:10.243.87.113:3306
+
+Chain INPUT (policy ACCEPT)
+num  target     prot opt source               destination
+
+Chain OUTPUT (policy ACCEPT)
+num  target     prot opt source               destination
+
+Chain POSTROUTING (policy ACCEPT)
+num  target     prot opt source               destination
+```
+
+### remove PREROUTING rule
+
+iptables -t nat -D PREROUTING <LINENUMBER>
+
+eg.
+
+```
+root@ip-10-243-87-86:~# iptables -t nat -D PREROUTING 1
+root@ip-10-243-87-86:~# iptables -t nat --line-numbers -L
+Chain PREROUTING (policy ACCEPT)
+num  target     prot opt source               destination
+
+Chain INPUT (policy ACCEPT)
+num  target     prot opt source               destination
+
+Chain OUTPUT (policy ACCEPT)
+num  target     prot opt source               destination
+
+Chain POSTROUTING (policy ACCEPT)
+num  target     prot opt source               destination
+```

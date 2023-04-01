@@ -1,0 +1,200 @@
+### virtual environments
+
+Always work in a virtual environment
+
+create one by;
+
+`mkdir virtualenv`
+`cd virtualenv`
+`virtualenv rates`
+`virtualenv -p python3 rates_py3 (for python 3)`
+`or python3 -m venv rates_py3`
+`. rates_py3/bin/activate to activate`
+`deactivate to deactivate environment`
+
+#### virtualenvwrapper
+
+This is a better wrapper for working within virtualk environments.
+Configure it;
+
+    # install
+    sudo pip install virtualenvwrapper
+
+    # find the shell script and add it to your profile (or zshrc) file
+    which virtualenvwrapper.sh
+
+    # add these lines to .profile or .zshrc
+    source /usr/local/bin/virtualenvwrapper.sh # path to script
+
+    export WORKON_HOME="/Users/kristian/virtualenvs" # this is the location of all virtual environments. otherwise the default .virtualenvironments is used
+
+    export PROJECT_HOME="/Users/kristian/python" # this is the location of python projects
+
+Listing environments
+
+    $ workon
+    flask
+    myenv
+    new_project
+
+Swapping to new project
+
+`workon new_project`
+
+Leave enviroment
+
+`deactivate`
+
+Create new project and virtual environment and bind them
+
+`mkproject new_project`
+`mkproject -p python3 new_project`
+
+To bind existing projects, activate the environment and then run
+
+`setvirtualenvproject`
+
+Create a virtual environment
+
+`mkvirtualenv new_env`
+
+Remove. virtual environment
+
+`rmvirtualenv new_env`
+
+### python requirements
+
+Once inside a virtual environment, you can show what packages are
+installed in this environment by using the freeze command with pip
+
+    (myenv) $ python -m pip freeze
+    certifi==2020.4.5.1
+    chardet==3.0.4
+    idna==2.9
+    python-box==4.2.2
+    requests==2.23.0
+    ruamel.yaml==0.16.10
+    ruamel.yaml.clib==0.2.0
+    toml==0.10.0
+    urllib3==1.25.9
+
+you can then easily create a requirements file by running the following
+command;
+
+`(myenv) $ python -m pip freeze > requirements.txt`
+
+and install those requirements in a new environment via;
+
+`(newenv) $ python -m pip install -r requirements.txt`
+
+### lists
+
+  - **list.append(newlist)** - will append the values as a single value
+    to an existing list. eg list\[1,2,3,\[10,20\]\]
+  - **list.extend(newlist)** - adds each value of the newlist to the
+    list. eg list\[1,2,3,10,20\]
+
+### working with files
+
+use 'with'. this handles opening and closing.
+
+    with open(fname, "r+") as fhandle:
+      lines = fhandle.readlines(); # reads all lines into a list
+
+or to iterate over each line..
+
+    with open('53.up', 'r+') as fhandle:
+      for line in fhandle:
+
+beware some methods (such as tell()) do not work within with()
+
+### iterate over dictionary (assoc. array)
+
+given an associative array (array), loop over the key, value pairs using
+items() method;
+
+    >>> dict = {"name":"super dude", "age":"300"};
+    >>> for key,value in dict.items():
+    ...  print ("Key: %s Value: %s" %(key, value));
+    ...
+    Key: name Value: super dude
+    Key: age Value: 300
+
+same can be done for keys() or values() methods. **Note that keys of
+hash arrays can be jumbled**
+
+### equivalent of a for..next loop
+
+*range* can be used to provide a list of items, after being provided a
+number (from len for example). range(10) does 0-9, so great for 'for
+next' loops.
+
+    >>> for i in range(10):
+    ...  print ("I:",i);
+    ...
+    I: 0
+    ... (snip)
+    I: 8
+    I: 9
+    >>>
+
+### range
+
+provide another number to give a start and end point
+
+    >>> for i in range(1,11):
+    ...  print ("I:",i);
+    ...
+    I: 1
+    I: 2
+    ..snip
+    I: 7
+    I: 8
+    I: 9
+    I: 10
+
+provide a 3rd number for step value.
+
+    >>> for i in range(1,11,2):
+    ...  print ("I:",i);
+    ...
+    I: 1
+    I: 3
+    I: 5
+    I: 7
+    I: 9
+    >>>
+
+here we loop over a list
+
+    >>> items = ['one', 'two', 'three'];
+    >>> for index in range(len(items)):
+    ...  print ('Current item:', items[index]);
+    ...
+    Current item: one
+    Current item: two
+    Current item: three
+
+### notify_slack
+
+    import requests
+
+    # handler for slack notifications
+    # create a webhook_url in slack and use below
+    # also update the CHANNELNAME to reflect your own
+    def notify_slack(msg, icon = ':starfleet:'):
+
+      logging.debug('Notifying Slack with results')
+
+      webhook_url = 'https://hooks.slack.com/services/AAAAAAA/BBBBBBB/WEBHOOKTOKEN'
+      payload = {"channel": "#CHANNELNAME", "username": "webhookbot", "text": msg, "icon_emoji": icon}
+
+      response = requests.post(
+        webhook_url, data=json.dumps(payload),
+        headers={'Content-Type': 'application/json'}
+      )
+      if response.status_code != 200:
+        raise ValueError(
+            'Request to slack returned an error %s, the response is:\n%s'
+            % (response.status_code, response.text)
+        )

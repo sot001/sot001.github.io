@@ -1,0 +1,1 @@
+`mount -o remount,rw /partition/identifier /mount/point`

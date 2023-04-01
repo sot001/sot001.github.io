@@ -1,0 +1,93 @@
+( from here:
+<http://www.tbsdtv.com/forum/viewtopic.php?f=47&t=7511&start=10>)
+
+if reinstalling, remove first by searching for install pkg via dpkg -l
+then removing. remove the driver files as well prior to building
+
+then
+
+`sudo su`
+`cd /usr/src/tbs/linux-tbs-drivers/`
+
+I've created a (n untested) script;
+
+`./mmakeitagain`
+
+which just runs the following commands;
+
+### Manual install
+
+`apt-get install linux-headers-$(uname -r)`
+`make clean`
+`make distclean`
+`./v4l/tbs-x86_64.sh  # this for kernel v 3)`
+`make`
+
+remove the old media directories
+
+`rm -rf /lib/modules/$(uname -r)/kernel/drivers/media`
+
+the directories below may require recreating, if the kernel version
+changes.
+
+`mkdir -p /lib/modules/$(uname -r)/kernel/drivers/media/video/m5mols`
+`mkdir -p /lib/modules/$(uname -r)/kernel/drivers/media/common/saa716x`
+`mkdir -p /lib/modules/$(uname -r)/kernel/drivers/media/dvb/ddbridge`
+`mkdir -p /lib/modules/$(uname -r)/kernel/drivers/media/video/marvell-ccic`
+`mkdir -p /lib/modules/$(uname -r)/kernel/drivers/media/../linux/drivers/media`
+
+Then
+
+`make install`
+
+optionally, you can create the package
+
+`checkinstall -D`
+
+When running checkinstall, select "y"es to make doc package and change
+option 3 to something like 1, or other that start with a number. you may
+get;
+
+```
+
+**********************************************************************
+
+ Done. The new package has been installed and saved to
+
+ /usr/src/tbs/linux-tbs-drivers/linux-tbs_20140926-1_i386.deb
+
+ You can remove it from your system anytime using:
+
+      dpkg -r linux-tbs
+
+**********************************************************************
+```
+
+or the checkinstall will fail, as you need to force it to overwrite)
+
+` dpkg --force-overwrite -i linux-tbs_1-1_i386.deb `
+`shutdown -r now`
+
+may also need to remove all old media directories. check the log file
+and rm -f if so
+
+check with;
+
+`mythtv@cube:~$ dmesg | grep dvb`
+`[   19.167024] DVB: registering new adapter (SAA716x dvb adapter)`
+
+and
+
+`mythtv@cube:~$ sudo  lsmod | grep dvb`
+`saa716x_tbs_dvb        47153  0`
+`tbs6928fe              17521  1 saa716x_tbs_dvb`
+`tbs6922fe              17837  1 saa716x_tbs_dvb`
+`rc_core                25734  10 ir_lirc_codec,ir_mce_kbd_decoder,ir_sony_decoder,ir_jvc_decoder,ir_rc6_decoder,ir_rc5_decoder,ir_nec_decoder,rc_tbs_nec,saa716x_tbs_dvb`
+`saa716x_core           48957  2 saa716x_tbs_dvb`
+`dvb_core               89930  2 saa716x_tbs_dvb,saa716x_core`
+`i2c_algo_bit           13199  1 saa716x_tbs_dvb`
+`tbs6618fe              17535  1 saa716x_tbs_dvb`
+`tbs6991fe              17521  1 saa716x_tbs_dvb`
+`stv090x                53193  1 saa716x_tbs_dvb`
+`tbs6680fe              17535  1 saa716x_tbs_dvb`
+`tbs6982fe              17877  1 saa716x_tbs_dvb`

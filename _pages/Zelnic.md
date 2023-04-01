@@ -1,0 +1,30 @@
+#### ingredients
+
+  - 1 packet of filo pastry
+  - 2 medium tomatoes
+  - good size onion.
+
+this size recipe will make enough for maybe 2 people depending on how
+much you like it. for a bigger size increase the amount of onion and
+tomato and use the whole lot of the pastry providing you make more
+layers on the bottom than the top as it has to hold together when you
+pick it up obviously.
+
+#### method
+
+1.  the oven should be preheated to 200 degrees, this will be written on
+    the packet with the recipe they usually give print on the packet.
+2.  this will use half your packet of filo, unfold and lay out. take 12
+    sheets for the bottom and 10 sheets for the top. ( i\`m guessing
+    your sizes are the same as ours when i said half) melt butter or use
+    spray oil if you want healthier, but must admit butter works best.
+3.  cook the onion and tomato, before laying out your pastry as being
+    thin it dries out rather quickly, (you can lay a wet tea towel over
+    the pastry to keep it moist. once it dries out it becomes very
+    brittle) just fry it up till cooked in a small amount of oil and set
+    aside.
+4.  now brush your pastry sheet by sheet in the container or oven tray
+    till you have the 12 for the bottom
+5.  spread the tomato and onion over then begin with the top 10 sheets
+    layering over the filling, roll the edges together just till you
+    have the filling encased

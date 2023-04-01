@@ -1,0 +1,125 @@
+Ruuning (actually configuring more like it) has always been a pain in
+the arse for me, so I've always used ready-rolled scripts in the past to
+configure OpenVPN for me. So, not changing anything in my behaviour,
+I've looked to Docker to provide an easily transportable solution for
+me.
+
+\[kylemanna's build\](https://hub.docker.com/r/kylemanna/openvpn/) is
+one I'm trying out. Its built on
+\[Alpine\](https://hub.docker.com/_/alpine/) which looks interesting
+too, being a tiny OS. Below I've captured my steps so I can replay them,
+with only the names changed to protect the innocent...
+
+stop my existing openvpn server
+
+`sudo service openvpn stop`
+
+move the existing openvpn config out of the way...
+
+`sudo mv /etc/openvpn /etc/openvpn.bak`
+
+get the image
+
+`docker pull kylemanna/openvpn`
+
+set the env variable to store the good stuff
+
+`OVPN_DATA="ovpn-data"`
+
+create the volume
+
+`docker volume create --name $OVPN_DATA`
+
+generate the config
+
+`docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_genconfig -u `<udp://CHANGEME.DOMAIN.COM>
+
+generate keys. it will ask for the passphrase you specified in the
+previous step
+
+`docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn ovpn_initpki`
+
+crank it up as a daemon, so it autostarts
+
+`docker run -v $OVPN_DATA:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN kylemanna/openvpn`
+
+### run openvpn as a service
+
+create an init file for it and run as a normal service;
+
+    description "OpenVPN container"
+    author "Me"
+    start on filesystem and started docker
+    stop on runlevel [!2345]
+    respawn
+    script
+      /usr/bin/docker start -a openvpn
+    end script
+
+### create client certificates
+
+swap CLIENT_NAME for user name
+
+build the client in a temp container, again passing the correct
+passphrase for ca
+
+`docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn easyrsa build-client-full CLIENT_NAME nopass`
+
+slurp out certs and stuff into a ovpn file for _secure_ tranport
+
+`docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient CLIENT_NAME > CLIENT_NAME.ovpn`
+
+### Ubuntu client can't resolve hosts, but can ping ips
+
+add the following lines to the openvpn config file you are using
+
+    script-security 2
+    up /etc/openvpn/update-resolv-conf
+    down /etc/openvpn/update-resolv-conf
+
+then run your client
+
+`sudo openvpn --config cube-docker.ovpn`
+
+### recreate container
+
+for example, to update it.
+
+1\. stop the service
+
+`docker stop openvpn`
+
+2\. check its dead
+
+`docker ps`
+
+3\. remove it
+
+`docker rm openvpn`
+
+4\. recreate it
+
+`OVPN_DATA="ovpn-data"; docker run -v $OVPN_DATA:/etc/openvpn -d -p 1194:1194/udp --name=openvpn --cap-add=NET_ADMIN kylemanna/openvpn`
+
+### old version
+
+<strong> not using this any more, docker containers much more
+convenient</strong>
+
+I've been using the openvpn-install script from here:
+<https://github.com/Nyr/openvpn-install>
+
+As per the Readme.md file, run it once to install openvpn and then run
+again to add or delete users. Very simply.
+
+    root@remote:~/openvpn-install# ./openvpn-install.sh
+
+    Looks like OpenVPN is already installed
+    What do you want to do?
+
+    1) Add a cert for a new user
+    2) Revoke existing user cert
+    3) Remove OpenVPN
+    4) Exit
+
+    Select an option [1-4]: 1
