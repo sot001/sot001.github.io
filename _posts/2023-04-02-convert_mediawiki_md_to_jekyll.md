@@ -1,10 +1,13 @@
 ---
-title:
+title: Convert mediawiki md to jekyll
 categories:
 - convert_mediawiki_md_to_jekyll
+- jekyll
 tags:
 - convert_mediawiki_md_to_jekyll
+- jekyll
 ---
+
 Once its be exported from mediawiki to markdown, use this script to nudge it into jekyll
 
 ```
