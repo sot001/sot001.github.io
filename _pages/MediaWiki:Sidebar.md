@@ -1,8 +1,0 @@
-  - navigation
-      - mainpage|mainpage-description
-      - Special:Categories|categories
-      - randompage-url|randompage
-      - helppage|help
-  - SEARCH
-  - TOOLBOX
-  - LANGUAGES

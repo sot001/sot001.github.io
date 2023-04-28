@@ -1,1 +1,0 @@
-[firewalld](firewalld "wikilink")

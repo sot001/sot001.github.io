@@ -1,1 +1,0 @@
-`passwd -e `<username>

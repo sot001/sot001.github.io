@@ -1,3 +1,0 @@
-  - [arp](arp "wikilink")
-  - [nmap](nmap "wikilink")
-  - [memcached](memcached "wikilink") - multi instance init script

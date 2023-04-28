@@ -1,1 +1,0 @@
-House 1 on trip to the jungle
