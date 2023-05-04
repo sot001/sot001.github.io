@@ -2,9 +2,9 @@
 title: git--helpful-commands
 date: '2023-04-01 19:37:56 +0000'
 categories:
-- git--helpful-commands
+- git
 tags:
-- git--helpful-commands
+- git
 ---
 
 ### help

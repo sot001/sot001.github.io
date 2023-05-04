@@ -2,9 +2,9 @@
 title: git-prompt
 date: '2023-04-01 19:37:56 +0000'
 categories:
-- git-prompt
+- git
 tags:
-- git-prompt
+- git
 ---
 
 
