@@ -32,6 +32,6 @@ do
 done
 
 # Write the closing header to the file
-echo "---" >> "$filename"
+echo "---" >> "$($echo $filename | sed -e 's/[[:space:]]/-/g'"
 
 echo "File created: $filename"
